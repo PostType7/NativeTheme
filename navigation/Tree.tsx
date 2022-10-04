@@ -1,13 +1,34 @@
-import { IconText } from "components/themes/PureBaldrTheme/partials";
 import { memo } from "react";
 import { NavItem } from ".";
-import { HStack, VStack } from "../layout";
+import { IconText, Text } from "../typo";
 
 interface Props {
   blocks: any;
   parentId?: number | string;
   expand?: string[];
 }
+
+const TreeNavItem:any = (item: any, i: number) => {
+  return (
+    <NavItem
+      key={`nav-${item.id}-${i}`}
+      color="dark"
+      href={item.url}
+      spacingY="md"
+      spacingX="lg"
+    >
+      <IconText tablet icon={item?.icon ? item.icon : null} text={item.name} />
+    </NavItem>
+  );
+};
+
+const TreeText:any = (item: any,i: number) => {
+  return (
+    <Text key={`text-${item.id}-${i}`} className={item.className}>
+      {item.text}
+    </Text>
+  );
+};
 
 export const Tree: React.FC<Props> = memo(
   ({ blocks, parentId = 0, expand = [] }: Props) => {
@@ -17,27 +38,26 @@ export const Tree: React.FC<Props> = memo(
 
     return (
       <>
-        {items.map((item: any) => {
+        {items.map((item: any, i:number) => {
           return (
-            <VStack key={item.id}>
-              <NavItem color="light" href={item.id}>
-                <HStack width="max">
-                  {item?.indentation && <div className=""></div>}
-                  <IconText
-                    icon={item?.icon ? item.icon : null}
-                    text={item.name}
-                  />
-                </HStack>
-              </NavItem>
+            <>
+              {item.component === "NavItem" ? (
+                TreeNavItem(item,i)
+              ) : item.component === "Text" ? (
+                TreeText(item,i)
+              ) : (
+                null
+              )}
+
               {
                 // @ts-ignore
                 expand.includes(item.id) ? (
                   <Tree blocks={blocks} parentId={item.id} expand={expand} />
                 ) : (
-                  <></>
+                  null
                 )
               }
-            </VStack>
+            </>
           );
         })}
       </>

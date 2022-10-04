@@ -1,23 +1,21 @@
 import {
   mixClass,
-  gapConditions,
-  justifyConditions,
-  itemsConditions,
+  gapMix,
+  paddingyMix,
+  paddingxMix,
 } from "helpers/P7mixClass";
 
 interface Props {
   spacing?: string;
-  items?: string;
-  justify?: string;
-  columns?: number;
   className?: string;
+  spacingY?: string;
+  spacingX?: string;
 }
 export const Grid: React.FC<Props> = ({
   className = "",
   spacing = "md",
-  justify = "between",
-  columns = 0,
-  items = "",
+  spacingY = "",
+  spacingX = "",
   children,
 }) => {
   return (
@@ -25,12 +23,9 @@ export const Grid: React.FC<Props> = ({
       className={mixClass({
         grid: true,
         [className]: true,
-        "md:grid-cols-2": columns == 2,
-        "md:grid-cols-3": columns == 3,
-        "md:grid-cols-4": columns == 4,
-        ...justifyConditions(justify),
-        ...itemsConditions(items),
-        ...gapConditions(spacing),
+        ...gapMix(spacing),
+        ...paddingyMix(spacingY),
+        ...paddingxMix(spacingX),
       })}
     >
       {children}

@@ -1,43 +1,36 @@
 import {
   mixClass,
-  gapConditions,
-  justifyConditions,
-  paddingConditions,
-  paddingxConditions,
-  widthConditions,
+  gapMix,
+  paddingxMix,
+  paddingyMix,
+  paddinglMix,
+  paddingrMix,
 } from "helpers/P7mixClass";
+import { HStackType } from "../types";
 
-interface Props {
-  spacing?: string;
-  justify?: string;
-  className?: string;
-  padding?: string;
-  paddingx?: string;
-  width?: string;
-}
-export const HStack: React.FC<Props> = ({
+export const HStack: React.FC<HStackType> = ({
   className = "",
   spacing = "md",
-  justify = "between",
   children,
-  padding = "",
-  paddingx = "",
-  width = "full",
+  spacingX = "",
+  spacingY = "",
+  spacingL = "",
+  spacingR = "",
 }) => {
   return (
     <div
       className={mixClass({
-        "flex items-center": true,
+        "flex": true,
         [className]: true,
-        ...widthConditions(width),
-        ...paddingxConditions(paddingx),
-        ...justifyConditions(justify),
-        ...gapConditions(spacing),
-        ...paddingConditions(padding),
+        ...paddingxMix(spacingX),
+        ...paddingyMix(spacingY),
+        ...paddinglMix(spacingL),
+        ...paddingrMix(spacingR),
+        ...gapMix(spacing),
       })}
     >
       {children}
     </div>
   );
 };
-// export default HStack;
+export default HStack;

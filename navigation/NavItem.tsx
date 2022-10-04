@@ -1,33 +1,42 @@
 import {
-  gapConditions,
   mixClass,
-  textColorConditions,
-  textHoverColorConditions,
-  widthConditions,
+  paddingrMix,
+  paddingxMix,
+  paddingyMix,
+  textColorMix,
+  textHoverColorMix,
 } from "helpers/P7mixClass";
-import { HStack, VStack } from "../layout";
 import Link from "next/link";
 
 interface Props {
   className?: string;
   href?: string;
   onClick?: any;
-  color?:string;
+  color?: string;
+  line?: string;
+  spacing?: string;
+  spacingX?: string;
+  spacingY?: string;
 }
 export const NavItem: React.FC<Props> = ({
   className = "",
   href,
   onClick,
   children,
-  color = "link-primary"
+  color = "link-primary",
+  spacing = "",
+  spacingX = "",
+  spacingY = "",
 }) => {
   return (
     <Link href={href ? href : "#"}>
       <a
         className={mixClass({
           "cursor-pointer transition duration-150 ease-in-out": true,
-          ...textHoverColorConditions(color),
-          ...textColorConditions(color),
+          ...textHoverColorMix(color),
+          ...textColorMix(color),
+          ...paddingyMix(spacingY ? spacingY : spacing),
+          ...paddingxMix(spacingX ? spacingX : spacing),
           [className]: true,
         })}
         onClick={onClick}
@@ -37,3 +46,4 @@ export const NavItem: React.FC<Props> = ({
     </Link>
   );
 };
+export default NavItem

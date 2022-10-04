@@ -1,23 +1,22 @@
-import {
-  mixClass,
-  bgColorConditions,
-  textColorConditions,
-} from "helpers/P7mixClass";
+import { mixClass, bgColorMix, textColorMix } from "helpers/P7mixClass";
 
 interface Props {
-  bgColor?: string;
-  color?: string;
+  bg?: string;
+  text?: string;
+  className?: string;
 }
 export const Color: React.FC<Props> = ({
-  color = "primary",
-  bgColor = "",
+  bg = "primary",
+  text = "",
+  className = "",
   children,
 }) => {
   return (
     <div
       className={mixClass({
-        ...bgColorConditions(bgColor),
-        ...textColorConditions(color),
+        [className]: className,
+        ...bgColorMix(bg),
+        ...textColorMix(text),
       })}
     >
       {children}

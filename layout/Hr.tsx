@@ -2,14 +2,14 @@ import { mixClass } from "helpers/P7mixClass";
 
 interface Props {
   className?: string;
-  orientation?: string;
+  vertical?: boolean;
 }
-export const Hr: React.FC<Props> = ({ orientation, className = "" }) => {
+export const Hr: React.FC<Props> = ({ vertical = false, className = "" }) => {
   return (
     <div
       className={mixClass({
-        "border-t": !orientation,
-        "border-r w-px h-full self-normal": orientation,
+        "border-t": !vertical,
+        "border-r w-px h-full self-normal": vertical,
         [className]: true,
       })}
     ></div>

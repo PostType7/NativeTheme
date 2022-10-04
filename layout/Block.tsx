@@ -2,7 +2,6 @@ import {
   mixClass,
   gapMix,
   paddingyMix,
-  paddingrMix,
   paddingxMix,
 } from "helpers/P7mixClass";
 
@@ -11,25 +10,22 @@ interface Props {
   className?: string;
   spacingY?: string;
   spacingX?: string;
-  spacingR?: string;
 }
-export const VStack: React.FC<Props> = ({
+export const Block: React.FC<Props> = ({
   className = "",
   spacing = "md",
-  spacingY="",
-  spacingX="",
-  spacingR="",
+  spacingY = "md",
+  spacingX = "md",
   children,
 }) => {
   return (
     <div
       className={mixClass({
-        "flex flex-col": true,
+        grid: true,
         [className]: true,
         ...gapMix(spacing),
         ...paddingyMix(spacingY),
         ...paddingxMix(spacingX),
-        ...paddingrMix(spacingR),
       })}
     >
       {children}

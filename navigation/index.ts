@@ -1,4 +1,3 @@
-export * from "./Button";
+export * from "./ActionItem";
 export * from "./NavItem";
-export * from "./Pagination";
 export * from "./Tree";
